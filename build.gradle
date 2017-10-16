@@ -28,25 +28,14 @@ buildscript {
 description = "Redis embedded server for Java integration testing"
 group = "com.netflix.spinnaker.embedded-redis"
 apply plugin: 'spinnaker.project'
-apply plugin: 'groovy'
-
-//groovy only for tests
-tasks.compileGroovy.enabled = false
+apply plugin: 'java'
 
 spinnaker {
   dependenciesVersion = "0.109.2"
 }
 
-test {
-  testLogging {
-    exceptionFormat = 'full'
-  }
-  minHeapSize = "512m"
-  maxHeapSize = "512m"
-}
-
 dependencies {
-  spinnaker.group('test')
+  testCompile spinnaker.dependency("junit")
   testCompile spinnaker.dependency('groovy')
 
   testCompile 'commons-logging:commons-logging:1.1.1'
